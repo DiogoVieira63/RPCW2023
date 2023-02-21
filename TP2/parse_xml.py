@@ -91,10 +91,27 @@ file.write(pageWeb)
 file.close()
 
 
+def createList(d):
+    lista = ""
+    for key,value in d.items():
+        if len(value) == 1:
+            lista += f"<li><p><b>{key.capitalize()}:</b>{value[0]}</p></li>\n"
+        else:
+            lista += f"<li><p><b>{key.capitalize()}:</b></p><ul>\n"
+            for v in value:
+                lista += f"<li><p>{v}</p></li>\n"
+            lista += f"</ul></li>\n"
+    return lista
+
+
+
+
+
 def convert_to_html():
     if not os.path.exists("arq_html"):
         os.makedirs("arq_html")
     for elem in range(1,len(elems)):
+        d = {}
         lista = ""
         namePage =elems[elem].find("identi").text.strip()
         for line in list(elems[elem].children):
@@ -103,9 +120,13 @@ def convert_to_html():
                 if name in mapTags:
                     name = mapTags[name]
                 if line.text:
-                    lista += f"<li><p><b>{name.capitalize()}:</b>{line.text}</p></li>\n"
+                    if name in d:
+                        d[name].append(line.text)
+                    else:
+                        d[name]=[line.text]
             except:
                 pass
+        lista = createList(d)
         pageWeb=f"""
 <!DOCTYPE html>
 <html>
@@ -122,9 +143,7 @@ def convert_to_html():
 </body>
 </html>
         """
-        file = open('arq_html/arq' + str(elem) +".html" , 'w')
-        file.write(pageWeb)
-        file.close()
+        write_file(pageWeb,"arq_html/arq"+str(elem)+".html")
 
 convert_to_html()
 
