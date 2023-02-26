@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifesto>
+    <meta>
+        <titulo> TPC 2</titulo>
+        <subtitulo>Creation of a simple server of "arqueossitios" records</subtitulo>
+        <data>2023-02-26</data>
+        <autor>
+            <nome>José Diogo Martins Vieira</nome>
+            <id>PG50518</id>
+            <gitlink>https://github.com/DiogoVieira63/RPCW2023</gitlink>
+        </autor>
+        <uc>RPCW</uc>
+    </meta>
+    <resumo>
+        <p>Creation of a simple server with <b>node.js</b> of "arqueossitios" records.</p>
+        <p>The first part was to process the dataset using <b>BeautifulSoup</b> and <b>lxml</b> to split the records and create a file for each element.</p>
+        <p>The second part was to create a server that given an index, will present the xml file that is associated with that index.(E.g. localhost:porta/1 -> sends file arq1.xml)</p>
+        <p>The third part was to create a page "index.html" to be the main page with a list of links to each page, this page will be served at "localhost:porta/"</p>
+        <p>The last part was to convert xml into html. This part was split into three smaller ones:</p>
+        <p>Each tag will be a paragraph and an element of list. The name of the tag will be bold and the text will be afterwards separated with ":"</p>
+        <p>For tags that appear more than once, will be created a sub-list instead of repetition</p>
+        <p>The tag "liga" that are inside of other tags, have a attribute termo, that value will be a subscript</p>
+    </resumo>
+    <resultados>
+        <resultado path="parse_xml.py">Python Program to parse and create all xml and hmtl files</resultado>
+        <resultado path="server.js">Node.js program to create the server</resultado>
+    </resultados>
+</manifesto>

@@ -23,12 +23,10 @@ mapTags = {
 }
 
 
-
-
 def parse_xml(filename):
     content = []
     # Read the XML file
-    with open("arq.xml", "r") as file:
+    with open(filename, "r") as file:
         # Read each line in the file, readlines() returns a list of lines
         content = file.readlines()
     # Combine the lines in the list into a string
@@ -103,9 +101,7 @@ def createList(d):
             lista += f"</ul></li>\n"
     return lista
 
-
-
-
+import re
 
 def convert_to_html():
     if not os.path.exists("arq_html"):
@@ -120,10 +116,24 @@ def convert_to_html():
                 if name in mapTags:
                     name = mapTags[name]
                 if line.text:
-                    if name in d:
-                        d[name].append(line.text)
+                    l = list(line.children)
+                    #print(l)
+                    string = ""
+                    if len(l) > 1:
+                        for child in l:
+                            try:
+                                if child.name == "liga":
+                                    string += f"<u>{child.text.strip()}</u><sub>{child['termo']}</sub>"
+                                else:
+                                    string += child.text
+                            except:
+                                string += child
                     else:
-                        d[name]=[line.text]
+                        string = line.text
+                    if name in d:
+                        d[name].append(string)
+                    else:
+                        d[name]=[string]
             except:
                 pass
         lista = createList(d)
