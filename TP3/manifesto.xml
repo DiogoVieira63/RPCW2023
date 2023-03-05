@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifesto>
+    <meta>
+        <titulo> TPC 3</titulo>
+        <subtitulo>Creation of a query service about a dataset of people</subtitulo>
+        <data>2023-03-05</data>
+        <autor>
+            <nome>José Diogo Martins Vieira</nome>
+            <id>PG50518</id>
+            <gitlink>https://github.com/DiogoVieira63/RPCW2023</gitlink>
+        </autor>
+        <uc>RPCW</uc>
+    </meta>
+    <resumo>
+        <p>First of all, all the available datasets were merge into one. 
+            There were 4 different datasets, all with unique records that resulted in one final dataset with 16000 unique entries</p>
+        <p>In this process, it was added an attribute <b>id</b> to each record. And an attribute <b>foto</b> that will be explained afterwards.</p>
+        <p>The data layer of the service will be provided with the help of <xref url="https://www.npmjs.com/package/json-server">Json Server</xref>.</p>
+        <p>The service will be created with <b>node.js</b> and is able to answer the following queries:</p>
+        <ul>
+            <li>List of all records</li>
+            <li>Sports Distribution</li>
+            <li>Sex Distribution</li>
+            <li>Top 10 professions</li>
+        </ul>
+        <p>There are 6 different pages:</p>
+        <ul>
+            <li>Main page, that presents all the options above.</li>
+            <li>One page for each option (Sports Distribution,Sex Distribution and Top 10 Professions)</li>
+            <li>A page that presents a list of people and some of their attributes. Each row is clickable, and it redirects to that person's page.</li>
+            <li>A page for each person that contains all information about them.</li>
+        </ul>
+        <p>All the pages are created at <xref url="mypages.js">my pages</xref> file. 
+            This file has specific functions for each page, and more generic functions to buttons and other elements that are reused between pages.</p>
+        <p>All the styling used was done with <xref url="w3.css">w3 css</xref>.</p>
+        <p>To make each person card more real,it was added a photo. All the photos were gotten via <xref url="https://this-person-does-not-exist.com">This person does not exist.</xref>.
+        This process was made in the merge of the datasets with the help of a small<xref url="generate_persons.py">script</xref></p> 
+        <p>Each person has now a field named <b>foto</b> that is a link to that person's photo.</p>
+        <p>Some screenshots can be found on the folder <b>Images</b>.</p>
+    </resumo>
+    <resultados>
+        <resultado path="merge_datasets.py">Python program to merge all datasets into one</resultado>
+        <resultado path="server.js">Node.js program to create the server</resultado>
+        <resultado path="mypages.js">Auxiliar Java Script file that contains all the functions for page creation.</resultado>
+        <resultado path="generate_person.py">Python program that contains function to generate a photo</resultado>
+    </resultados>
+</manifesto>
