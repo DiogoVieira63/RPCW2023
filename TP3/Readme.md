@@ -1,3 +1,4 @@
+<p>This project consists in the creation of a query service about a dataset of people.</p>
 <p>First of all, all the available datasets were merge into one. 
     There were 4 different datasets, all with unique records that resulted in one final dataset with 16000 unique entries</p>
 <p>In this process, it was added an attribute <b>id</b> to each record. And an attribute <b>foto</b> that will be explained afterwards.</p>
@@ -19,6 +20,12 @@
 <p>All the pages are created at <xref url="mypages.js">my pages</xref> file. 
     This file has specific functions for each page, and more generic functions to buttons and other elements that are reused between pages.</p>
 <p>All the styling used was done with <xref url="w3.css">w3 css</xref>.</p>
-<p>To make each person card more real,it was added a photo. All the photos were gotten via <xref url="https://this-person-does-not-exist.com">This person does not exist</xref>.
-This process was made in the merge of the datasets with the help of a small<xref url="generate_persons.py">script</xref>.</p> 
+<p>To make each person card more real,it was added a photo. All the photos were gotten via <xref url="https://this-person-does-not-exist.com">This person does not exist.</xref>.
+This process was made in the merge of the datasets with the help of a small<xref url="generate_persons.py">script</xref></p> 
 <p>Each person has now a field named <b>foto</b> that is a link to that person's photo.</p>
+<p>Some screenshots can be found on the folder <b>Images</b>.</p>
+
+![Main Page](Images/MainPage.png "Main Page")
+![List of People](Images/ListaPessoas.png "Lista of People")
+![Top 10 Professions](Images/top10profissoes.png "Top 10 Professions")
+![Person's Card](Images/cartaoPessoa.png "Person's card")

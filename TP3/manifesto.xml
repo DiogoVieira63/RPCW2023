@@ -12,6 +12,7 @@
         <uc>RPCW</uc>
     </meta>
     <resumo>
+        <p>This project consists in the creation of a query service about a dataset of people.</p>
         <p>First of all, all the available datasets were merge into one. 
             There were 4 different datasets, all with unique records that resulted in one final dataset with 16000 unique entries</p>
         <p>In this process, it was added an attribute <b>id</b> to each record. And an attribute <b>foto</b> that will be explained afterwards.</p>
