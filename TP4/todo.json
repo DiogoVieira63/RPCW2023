@@ -1,11 +1,36 @@
 {
   "task": [
     {
-      "done": false,
-      "id": 1,
+      "deadline": "2023-03-14",
       "description": "Todo",
       "responsible": "Me",
-      "deadline": "2023-03-07"
+      "category": "Work",
+      "id": 1,
+      "done": "true"
+    },
+    {
+      "deadline": "2023-03-16",
+      "description": "Todo",
+      "responsible": "You",
+      "category": "RPCW",
+      "done": "false",
+      "id": 2
+    },
+    {
+      "deadline": "2023-03-14",
+      "description": "Something",
+      "responsible": "Eu",
+      "category": "School",
+      "done": "false",
+      "id": 3
+    },
+    {
+      "deadline": "2023-03-20",
+      "description": "Something",
+      "responsible": "Eu",
+      "category": "RPCW",
+      "id": 4,
+      "done": "false"
     }
   ]
 }

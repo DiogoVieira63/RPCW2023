@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifesto>
+    <meta>
+        <titulo> TPC 4</titulo>
+        <subtitulo>Creation a Single Page Application for a To Do list</subtitulo>
+        <data>2023-03-12</data>
+        <autor>
+            <nome>José Diogo Martins Vieira</nome>
+            <id>PG50518</id>
+            <gitlink>https://github.com/DiogoVieira63/RPCW2023</gitlink>
+        </autor>
+        <uc>RPCW</uc>
+    </meta>
+    <resumo>
+        <p>This project consists in the creation of single page application for a To Do lists.</p>
+        <p>The data layer will be served with <b>json-server</b>. The dataset will begin as an empty list of tasks.</p>
+        <p>The application will be created with <b>Node.js</b>.</p>
+        <p>The application will only have one page that is divided in two main sections:</p>
+        <ul>
+            <li>Add/Edit a task</li>
+            <li>List of tasks(ToDo/Done)</li>
+        </ul>
+        <p>The task is composed by: Deadline, Description ,Responsible, Category.</p>
+        <p>After being added, the task will be on the ToDo list.</p>
+        <p>In the lists, each task display the attributes and there's three actions related to which one.</p>
+        <ul>
+            <li>Edit</li>
+            <li>Mark as Done/Undone</li>
+            <li>Delete</li>
+        </ul>
+        <p>When the task is marked as done/undone, it will be moved to the other list.</p>
+        <p>When the task is deleted, it will be removed from the list.</p>
+        <p>When the task is edited, the form will be filled with the task's attributes and the user can change them.</p>
+        <p>When the user clicks on the button "Filter", the list will be filtered by the category selected.</p>
+        <p>Each action will be a POST method, after the response, the page will be reloaded, so the changes take effect.</p>
+    </resumo>
+    <resultados>
+        <resultado path="server.js">Node.js program to create the server</resultado>
+        <resultado path="templates.js">Auxiliar Java Script file that contains function for page creation.</resultado>
+    </resultados>
+</manifesto>
