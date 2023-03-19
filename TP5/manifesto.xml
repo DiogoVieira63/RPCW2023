@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifesto>
+    <meta>
+        <titulo> TPC 5</titulo>
+        <subtitulo>Creation a Single Page Application for a To Do list with Express</subtitulo>
+        <data>2023-03-19</data>
+        <autor>
+            <nome>José Diogo Martins Vieira</nome>
+            <id>PG50518</id>
+            <gitlink>https://github.com/DiogoVieira63/RPCW2023</gitlink>
+        </autor>
+        <uc>RPCW</uc>
+    </meta>
+    <resumo>
+        <p>This project consists on doing the same app of the previous homework, but now with Express.</p>
+        <p>The data layer will remain the same.</p>
+        <p>The application will be created with <b>Node.js</b> and <b>Express</b>.</p>
+        <p>All the GET and POST methods of the app, will be dealt with on the routes folder.</p>
+        <p>The requests to the data layer will be done on the controllers folder.</p>
+        <p>All the views for the app will be done with the help of pug templates and are present on the views folder.</p>
+        <p>The public folder contains all the static files for the app.</p>
+        <p>The bin folder contains the file responsible to start the app.</p>
+        <p>All the app funcionalites remain the same.</p>
+        <ul>
+            <li>Add a task</li>
+            <li>Edit a task</li>
+            <li>Delete a task</li>
+            <li>Mark as done/undone </li>
+            <li>Filter by category</li>
+        </ul>
+    </resumo>
+    <resultados>
+        <resultado path="routes/index.js">File responsible to deal with all requests</resultado>
+        <resultado path="views/index.pug">Pug file of the app.</resultado>
+    </resultados>
+</manifesto>
