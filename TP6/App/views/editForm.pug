@@ -1,0 +1,134 @@
+extends layout
+
+mixin createRowSelect(nome, key, options)
+    tr
+      td
+        b= nome
+      td
+        select.w3-select.w3-round(name=key)
+          each option in options
+            if a[key] == option
+              option(value=option selected)= option
+            else
+              option(value=option)= option
+
+
+mixin createRow(nome,key,tipo)
+  - let value = a ? a[key] : "";  
+  tr
+    td
+      b= nome
+    td 
+      input.w3-input.w3-round(type=tipo name=key value=value required)
+
+
+mixin createRowArray(nome, key,tipo)
+  -   let length = a ? a[key].length + 1 : 1;
+  -   let value = a ? a[key] : [];
+  tr
+    td(style="vertical-align: middle;")
+      b= nome
+    td
+      ul(id=key style="list-style: none;")
+        li
+          input.w3-input.w3-round.w3-twothird(type=tipo name=key)
+          span.w3-right
+            button.w3-button.w3-round.w3-right(onclick=`addToList("${key}")` type="button")
+              i(class="fa fa-plus" aria-hidden="true" style="color: green;")
+        each v in value
+          li
+            input.w3-input.w3-round.w3-twothird(type="hidden" name=key value=v)
+            p.w3-twothird= v
+            button.w3-button.w3-round.w3-right(onclick=`removeFromArray(this)` type="button")
+              i(class="fa fa-times" aria-hidden="true" style="color: red;")
+
+        
+
+mixin boolToEmoji(value)
+  if value == true
+    i.fa.fa-check(style='color: green')
+  else if value == false
+    i.fa.fa-times(style='color: red')
+  else
+    span= value
+
+
+mixin radioButton(key,elem)
+  - let fk = [key,elem[1][0]];
+  span
+    if a[fk[0]][fk[1]] == true
+      input.w3-round.w3-radio(type=elem[1][1] value="true" name=key+"."+elem[1][0] checked)    
+    else
+      input.w3-round.w3-radio(type=elem[1][1] value="true" name=key+"."+elem[1][0])
+    label.w3-validate.w3-margin
+      +boolToEmoji(true)
+  span
+    if a[fk[0]][fk[1]] == false
+      input.w3-round.w3-radio(type=elem[1][1] value="false" name=key+"."+elem[1][0] checked)      
+    else
+      input.w3-round.w3-radio(type=elem[1][1] value="false" name=key+"."+elem[1][0])      
+    label.w3-validate.w3-margin
+      +boolToEmoji(false)
+
+mixin createRowObject(nome,key,value)
+    - var length = Object.keys(value).length;
+    tr
+      td(rowspan= length, style="vertical-align: middle;")
+          b= nome
+      td  
+        span.w3-half
+          b= Object.keys(value)[0]
+        span.w3-half
+          if Object.values(value)[0][1] == "radio"
+            +radioButton(key,Object.entries(value)[0])
+          else
+            - let fk = [key,Object.values(value)[0][0]];
+            input.w3-input.w3-round(type=Object.values(value)[0][1] name=fk[0]+"."+fk[1]  value=a[fk[0]][fk[1]])
+    each elem in Object.entries(value).slice(1)
+        tr
+          td
+            span.w3-half
+              b= elem[0]
+            span.w3-half
+              if elem[1][1] == "radio"
+                +radioButton(key,elem)
+              else
+                - let fk = [key,elem[1][0]];
+                input.w3-input.w3-round(type=elem[1][1] name=fk[0]+"."+fk[1]  value=a[fk[0]][fk[1]])      
+
+
+
+block content 
+  - var color = "indigo";
+  .w3-white.w3-card.w3-center.w3-content.w3-margin-top.w3-margin-bottom
+    header.w3-container.w3-center(class='w3-' + color)
+      h1 Cartão Pessoal
+    form(method="POST")
+      table.w3-table-all.w3-centered
+        +createRow("Nome", "nome", "text")
+        +createRow("Idade", "idade", "number")
+        +createRowSelect("Sexo","sexo", ["masculino", "feminino", "outro"])
+        +createRow("Profissão", "profissao", "text")
+        +createRowArray("Desportos", "desportos","text")
+        +createRowArray("Animais", "animais","text")
+        +createRowObject("Morada", "morada", {"Distrito" : ["distrito","text"], "Cidade" : ["cidade","text"]})
+        +createRowObject("Partido Político","partido_politico",{"Abreviatura" : ["party_abbr","text"], "Nome" : ["party_name","text"]})
+        +createRowArray("Figura Pública Portuguesa", "figura_publica_pt","text")
+        +createRow("Marca de Carro", "marca_carro", "text")
+        +createRowArray("Destinos Favoritos", "destinos_favoritos","text")
+      
+        +createRowObject("Atributos","atributos", {
+         Fumador: ["fumador","radio"], 
+         "Gosta de Cinema": ["gosta_cinema","radio"], 
+         "Gosta de Viajar": ["gosta_viajar","radio"], 
+         "Acorda Cedo":     ["acorda_cedo","radio"], 
+         "Gosta de Ler":    ["gosta_ler","radio"], 
+         "Gosta de Música": ["gosta_musica","radio"], 
+         "Gosta de Comer":  ["gosta_comer","radio"], 
+         "Gosta de Animais de Estimação": ["gosta_animais_estimacao","radio"], 
+         "Gosta de Dançar": ["gosta_dancar","radio"], 
+         "Comida Favorita": ["comida_favorita","text"]
+         })
+      button.w3-button.w3-round.w3-margin.w3-green Apply Changes
+      button.w3-button.w3-round.w3-margin.w3-red(type="button") 
+        a(href="/pessoas/" + a._id) Cancel

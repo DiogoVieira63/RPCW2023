@@ -1,0 +1,43 @@
+doctype html
+html
+  head
+    title Student Management
+    meta(charset='utf-8')
+    link(rel='icon', href='/images/favicon.png')
+    link(rel='stylesheet', href='/stylesheets/w3.css')
+    link(rel="stylesheet",href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css")
+
+  body
+    script(type="text/javascript").
+      function removeFromArray(button){
+        var li = button .parentNode;
+        var ul = li.parentNode;
+        ul.removeChild(li);
+      }
+      function addToList(key){
+        var current = document.getElementsByName(key)[0].value;
+        if (current == "") return;
+        var list = document.getElementById(key);
+        var li = document.createElement("li");
+        var span = document.createElement("p");
+        var button = document.createElement("button");
+        var i = document.createElement("i");
+        var input = document.createElement("input");
+        span.innerHTML = current;
+        span.className = "w3-twothird";
+        button.className = "w3-button w3-round w3-right";
+        button.onclick = function() {removeFromArray(this)};
+        i.className = "fa fa-times";
+        i.setAttribute("aria-hidden", "true");
+        i.style.color = "red";
+        input.type = "hidden";
+        input.name = key;
+        input.value = current;
+        button.appendChild(i);
+        li.appendChild(input);
+        li.appendChild(span);
+        li.appendChild(button);
+        list.appendChild(li);
+        document.getElementsByName(key)[0].value = "";
+      }
+    block content

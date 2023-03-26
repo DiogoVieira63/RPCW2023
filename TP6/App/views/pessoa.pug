@@ -1,0 +1,95 @@
+extends layout
+
+block content
+
+mixin createRow(key, value)
+  tr
+    td
+      b= key
+    td= value
+
+mixin createRowArray(key, value)
+  tr
+    td(rowspan= value.length, style="vertical-align: middle;")
+      b= key
+    td= value[0]
+  each v in value.slice(1)
+    tr
+      td= v
+
+
+mixin boolToEmoji(value)
+  if value == true
+    i.fa.fa-check(style='color: green')
+  else if value == false
+    i.fa.fa-times(style='color: red')
+  else
+    span= value
+
+mixin createRowObject(key,value)
+    - var length = Object.keys(value).length;
+    tr
+      td(rowspan= length, style="vertical-align: middle;")
+          b= key
+      td  
+        span.w3-half
+          b= Object.keys(value)[0]
+        span.w3-half
+          +boolToEmoji(Object.values(value)[0])
+    each elem in Object.entries(value).slice(1)
+        tr
+          td
+            span.w3-half
+              b= elem[0]
+            span.w3-half
+              +boolToEmoji(elem[1])
+      
+
+block content 
+  if del
+    .w3-center
+      h3 Are you sure you want to delete this person?
+      button.w3-button.w3-red.w3-round.w3-margin
+        a(href=`/pessoas/delete/${a._id}`) Delete
+      button.w3-button.w3-blue.w3-round.w3-margin
+        a(href=`/`) Cancel
+  if edit
+    .w3-container.w3-green.w3-center
+      h3 Person edited successfully
+  - var color = "indigo";
+  if add
+    .w3-container.w3-green.w3-center
+      h3 Person added successfully  
+  .w3-white.w3-card.w3-center.w3-content.w3-margin-top.w3-margin-bottom
+    header.w3-container.w3-center(class=`w3-${color}`)
+      h1 Cartão Pessoal
+    table.w3-table-all.w3-centered
+      +createRow("Nome", a.nome)
+      +createRow("Idade", a.idade)
+      +createRow("Sexo", a.sexo)
+      +createRowObject("Morada", {Distrito: a.morada.distrito, Cidade: a.morada.cidade})
+      +createRow("Profissão", a.profissao)
+      +createRowObject("Partido Político", {Abreviatura: a.partido_politico.party_abbr, Nome: a.partido_politico.party_name})
+      +createRowArray("Desportos", a.desportos)
+      +createRowArray("Animais", a.animais)
+      +createRowArray("Figura Pública Portuguesa", a.figura_publica_pt)
+      +createRow("Marca de Carro", a.marca_carro)
+      +createRowArray("Destinos Favoritos", a.destinos_favoritos)
+      +createRowObject("Atributos", {
+        Fumador: a.atributos.fumador, 
+        "Gosta de Cinema": a.atributos.gosta_cinema, 
+        "Gosta de Viajar": a.atributos.gosta_viajar, 
+        "Acorda Cedo": a.atributos.acorda_cedo, 
+        "Gosta de Ler": a.atributos.gosta_ler, 
+        "Gosta de Música": a.atributos.gosta_musica, 
+        "Gosta de Comer": a.atributos.gosta_comer, 
+        "Gosta de Animais de Estimação": a.atributos.gosta_animais_estimacao, 
+        "Gosta de Dançar": a.atributos.gosta_dancar, 
+        "Comida Favorita": a.atributos.comida_favorita
+        })
+    if !del
+      button.w3-button.w3-round.w3-margin(class=`w3-${color}`)
+        a(href="/#" +a._id) Return 
+      button.w3-btn.w3-round.w3-margin(class=`w3-${color}`)
+        a(href="/pessoas/edit/" + a._id) Edit
+

@@ -1,0 +1,121 @@
+extends layout
+
+mixin createRow(nome,key,tipo)
+  tr
+    td
+      b= nome
+    td 
+      input.w3-input.w3-round(type=tipo name=key required)
+
+
+mixin createRowArray(nome, key,tipo)
+  -   let length = a ? a[key].length + 1 : 1;
+  -   let value = a ? a[key] : [];
+  tr
+    td(rowspan= length style="vertical-align: middle;")
+      b= nome
+    td
+      ul(id=key style="list-style: none;")
+        each v in value
+          li
+            span= v
+            span
+              button.w3-button.w3-round
+                i(class="fa fa-times" aria-hidden="true" style="color: red;")
+        li
+          input.w3-input.w3-round.w3-twothird(type=tipo name=key)
+          span.w3-right
+          button.w3-button.w3-round.w3-right(onclick=`addToList("${key}")` type="button")
+            i(class="fa fa-plus" aria-hidden="true" style="color: green;")
+
+        
+mixin boolToEmoji(value)
+  if value == true
+    i.fa.fa-check(style='color: green')
+  else if value == false
+    i.fa.fa-times(style='color: red')
+  else
+    span= value
+
+
+mixin radioButton(key,elem)
+  span
+    input.w3-round.w3-radio(type=elem[1][1] value="true" name=key+"."+elem[1][0])    
+    label.w3-validate.w3-margin
+      +boolToEmoji(true)
+  span
+    input.w3-round.w3-radio(type=elem[1][1] value="false" name=key+"."+elem[1][0])      
+    label.w3-validate.w3-margin
+      +boolToEmoji(false)
+
+
+mixin createRowObject(nome,key,value)
+    - var length = Object.keys(value).length;
+    tr
+      td(rowspan= length, style="vertical-align: middle;")
+          b= nome
+      td  
+        span.w3-half
+          b= Object.keys(value)[0]
+        span.w3-half
+          if Object.values(value)[0][1] == "radio"
+            +radioButton(key,Object.entries(value)[0])
+          else
+            input.w3-input.w3-round(type=Object.values(value)[0][1] name=key+"."+Object.values(value)[0][0])
+    each elem in Object.entries(value).slice(1)
+        tr
+          td
+            span.w3-half
+              b= elem[0]
+            span.w3-half
+              if elem[1][1] == "radio"
+                +radioButton(key,elem)
+              else
+                input.w3-input.w3-round(type=elem[1][1] name=key+"."+elem[1][0])      
+
+    
+mixin createRowSelect(nome, key, options)
+    tr
+      td
+        b= nome
+      td
+        select.w3-select.w3-round(name=key)
+          each option in options
+            option(value=option)= option
+
+
+block content 
+  - var color = "indigo";
+  .w3-white.w3-card.w3-center.w3-content.w3-margin-top.w3-margin-bottom
+    header.w3-container.w3-center(class='w3-' + color)
+      h1 Cartão Pessoal
+    form(method="POST")
+      table.w3-table-all.w3-centered(id = "table")
+        +createRow("Nome", "nome", "text")
+        +createRow("Idade", "idade", "number")
+        +createRowSelect("Sexo","sexo", ["masculino", "feminino", "outro"])
+        +createRow("Profissão", "profissao", "text")
+        +createRowArray("Desportos", "desportos","text")
+        +createRowArray("Animais", "animais","text")
+        +createRowObject("Morada", "morada", {"Distrito" : ["distrito","text"], "Cidade" : ["cidade","text"]})
+        +createRowObject("Partido Político","partido_politico",{"Abreviatura" : ["party_abbr","text"], "Nome" : ["party_name","text"]})
+        +createRowArray("Figura Pública Portuguesa", "figura_publica_pt","text")
+        +createRow("Marca de Carro", "marca_carro", "text")
+        +createRowArray("Destinos Favoritos", "destinos_favoritos","text")
+      
+        +createRowObject("Atributos","atributos", {
+         Fumador: ["fumador","radio"], 
+         "Gosta de Cinema": ["gosta_cinema","radio"], 
+         "Gosta de Viajar": ["gosta_viajar","radio"], 
+         "Acorda Cedo":     ["acorda_cedo","radio"], 
+         "Gosta de Ler":    ["gosta_ler","radio"], 
+         "Gosta de Música": ["gosta_musica","radio"], 
+         "Gosta de Comer":  ["gosta_comer","radio"], 
+         "Gosta de Animais de Estimação": ["gosta_animais_estimacao","radio"], 
+         "Gosta de Dançar": ["gosta_dancar","radio"], 
+         "Comida Favorita": ["comida_favorita","text"]
+         })
+
+      button.w3-button.w3-round.w3-margin.w3-green Submit
+      button.w3-button.w3-round.w3-margin.w3-red
+        a(href="/") Cancelar

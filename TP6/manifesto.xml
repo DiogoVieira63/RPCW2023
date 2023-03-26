@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifesto>
+    <meta>
+        <titulo> TPC 1</titulo>
+        <subtitulo>Creation a application for people dataset with mongoDB</subtitulo>
+        <data>2023-02-15</data>
+        <autor>
+            <nome>José Diogo Martins Vieira</nome>
+            <id>PG50518</id>
+            <gitlink>https://github.com/DiogoVieira63/RPCW2023</gitlink>
+        </autor>
+        <uc>RPCW</uc>
+    </meta>
+    <resumo>
+        <p>The goal is to create a application similar to the alunos application that has been implemented in class.</p>
+        <p>The data layer will be done with mongoDB. For that, we first have to import the dataset to mongoDB.</p>
+        <p>Now, the application is using NodeJs and Express,and will connect to the database with Mongoose.</p>
+        <p>The application will have the following functionalities:</p>
+        <ul>
+            <li>List all people</li>
+            <li>Insert a new person</li>
+            <li>View all the info of a person</li>
+            <li>Update a person</li>
+            <li>Delete a person</li>
+        </ul>
+        <p>All the views of the app, will be done with Pug templates.</p>
+    </resumo>
+    <resultados>
+        <resultado path="App/views">All the pug template files</resultado>
+        <resultado path="App/public">All the static files</resultado>
+        <resultado path="App/routes/index.js">File responsible to deal with all requests to the app</resultado>
+        <resultado path="App/models/pessoa.js">The file with the Schema to the database</resultado>
+        <resultado path="App/controllers/pessoa.js">The file responsible of the communication with database</resultado>
+        <resultado path="images">Screenshot of the app</resultado>
+    </resultados>
+</manifesto>
